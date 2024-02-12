@@ -14,7 +14,7 @@ export default function layout() {
           }}
         />
         <Stack.Screen
-          name="audio/[id]"
+          name="player"
           options={{
             headerShown: false,
             animation: "slide_from_bottom",

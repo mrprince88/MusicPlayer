@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import * as MediaLibrary from "expo-media-library";
 import MusicItem from "src/components/MusicItem";
+import Footer from "src/components/Footer";
 
 export default function App() {
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
@@ -24,6 +25,7 @@ export default function App() {
           <MusicItem key={index} data={file} />
         ))}
       </ScrollView>
+      <Footer />
     </View>
   );
 }

@@ -13,7 +13,7 @@ export default function MusicItem({ data }: { data: Asset }) {
 
   return (
     <Link
-      href="audio/12313"
+      href="player"
       className="p-2 border-b border-gray-200 rounded flex flex-row items-center gap-2"
     >
       {/* {currentPlaying === data.uri ? (
