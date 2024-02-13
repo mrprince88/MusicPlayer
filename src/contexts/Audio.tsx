@@ -5,7 +5,6 @@ type AudioContextType = {
   playAudio: (uri: string) => Promise<void>;
   getCurrentStatus: () => Promise<AVPlaybackStatus>;
   pauseAudio: () => Promise<void>;
-  currentPlaying: string | null;
 };
 
 const AudioContext = createContext<AudioContextType | null>(null);
@@ -24,8 +23,6 @@ export default function AudioProvider({
   children: React.ReactNode;
 }) {
   const [audio] = useState(new Audio.Sound());
-  const [currentPlaying, setCurrentPlaying] = useState<string | null>(null);
-
   // play audio
   const playAudio = async (uri: string) => {
     const status = await audio.getStatusAsync();
@@ -39,13 +36,10 @@ export default function AudioProvider({
     } else {
       await audio.loadAsync({ uri }, { shouldPlay: true });
     }
-
-    setCurrentPlaying(uri);
   };
 
   const pauseAudio = async () => {
     await audio.pauseAsync();
-    setCurrentPlaying(null);
   };
 
   const getCurrentStatus = () => {
@@ -53,9 +47,7 @@ export default function AudioProvider({
   };
 
   return (
-    <AudioContext.Provider
-      value={{ pauseAudio, playAudio, getCurrentStatus, currentPlaying }}
-    >
+    <AudioContext.Provider value={{ pauseAudio, playAudio, getCurrentStatus }}>
       {children}
     </AudioContext.Provider>
   );
